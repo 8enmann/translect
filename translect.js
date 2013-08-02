@@ -48,10 +48,10 @@ function define(query) {
       raw = data.query.pages[page].revisions[0]['*'];
     }
     print('<b>== ' + query + ' ==</b>');
-    //console.log(raw);
+    console.log(raw);
     var findTargetMode = false;
     $.each(raw.split('\n'), function(i, elem) {
-      if (/-flex-nom-/.test(elem)) {
+      if (/(?:-flex-nom-|-flex-adj-)/.test(elem)) {
         findTargetMode = true;
       }
       if (findTargetMode) {
@@ -65,9 +65,7 @@ function define(query) {
       if (verbForm != null && verbForm[1] != query) {
         define(verbForm[1]);
       }
-      // TODO: noun form, ex bourreaux (-flex-nom-)
-      // TODO: adj form, ex heureuse (-flex-adj-)
-      var translations = /^\{\{T|en\}\} : (.*?)$/.exec(elem);
+      var translations = /^\{\{T|en(?:\|trier)?\}\} : (.*?)$/.exec(elem);
       if (translations != null) {
         $.each(translations[1].split(','), function(j, word) {
           print(clean(word));
