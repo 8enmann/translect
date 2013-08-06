@@ -2,6 +2,13 @@ function submit() {
  define($('#query').val());
 }
 
+$('#activate').click(function(event) {
+  chrome.tabs.executeScript(null, {file: 'jquery.min.js'});
+  chrome.tabs.insertCSS(null, {file: 'translect.css'});
+  chrome.tabs.executeScript(null, {file: 'translect.js'});
+  console.log('injection complete');
+});
+
 $('#submit').click(function(event) {
   submit();
 }); 
@@ -87,15 +94,15 @@ var getSelected = function(){
   return t;
 }
 
-// This might not work in chrome content script.
-$(document).ready(function(){
-  var $div = $('<div id="console"></div>').prependTo('body');
-  $div.html("Translations");
-  $(document).bind("mouseup", mouseup);
+$(document).ready(function() {
+var $div = $('<div id="console"></div>').prependTo('body');
+$div.html("Translations");
+$(document).bind("mouseup", mouseup);
+console.log('mousup');
 });
 
-
 var mouseup = function(){
+  console.log('inside');
   var st = getSelected();
   if(st!=''){
     console.log(st);

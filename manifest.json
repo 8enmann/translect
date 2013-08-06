@@ -8,16 +8,10 @@
              "48": "images/icon48.png",
             "128": "images/icon128.png" },
   "permissions": [
-    "https://fr.wiktionary.org/"
+    "https://fr.wiktionary.org/",
+    "tabs", "http://*/*"
   ],
   "content_security_policy": "script-src 'self' https://fr.wiktionary.org; object-src 'self'",
-  "content_scripts": [
-    {
-      "matches": ["http://*/*", "file://*"],
-      "css": ["translect.css"],
-      "js": ["jquery.min.js", "translect.js"]
-    }
-  ],
   "browser_action": {
     "default_icon": "images/icon.png",
     "default_popup": "translect.html"
